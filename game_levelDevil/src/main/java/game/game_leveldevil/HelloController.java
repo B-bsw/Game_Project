@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -16,6 +17,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 
 public class HelloController {
@@ -75,17 +78,6 @@ public class HelloController {
             default:
                 break;
         }
-    }
-
-
-
-
-    private void animateImage(ImageView imageView) {
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(2), imageView);
-        transition.setByX(200);
-        transition.setAutoReverse(true);
-        transition.setCycleCount(TranslateTransition.INDEFINITE);
-        transition.play();
     }
 
 }
