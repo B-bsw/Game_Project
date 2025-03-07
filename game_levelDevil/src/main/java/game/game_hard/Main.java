@@ -15,7 +15,13 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
-            scene = new Scene(loadFXML("first.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("first.fxml"));
+            Parent root = loader.load();
+            scene = new Scene(root);
+
+            Animation controller = loader.getController();
+            controller.initialize(scene);
+
             stage.setScene(scene);
             stage.setTitle("MyGame");
             stage.show();

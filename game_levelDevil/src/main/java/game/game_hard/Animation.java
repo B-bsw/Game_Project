@@ -25,12 +25,14 @@ public class Animation {
 
     @FXML
     private Box b;
+    @FXML
+    private Box box_move;
 
     @FXML
     private ImageView human;
+    private double boxSpeed = 5.0;
 
     private HashMap<KeyCode, Boolean> keys = new HashMap<>();
-    private Timeline timeline = new Timeline();
     private Scene scene;
 
     @FXML
@@ -40,37 +42,30 @@ public class Animation {
 
     private List<Node> platforms = new ArrayList<>();
 
-    public void initialize(Scene scene) {
-        if (scene == null) {
-            throw new IllegalArgumentException("Scene cannot be null");
-        }
 
+    public void initialize(Scene scene){
         this.scene = scene;
 
-        scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
-        scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
-
-        scene.getRoot().requestFocus();
+        scene.setOnKeyPressed(this::handleKeyboard);
+        scene.setOnKeyReleased(this::handleKeyRelease);
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                update();
+                System.out.println("Player X: " + (human.getLayoutX() + human.getTranslateX()));
+                if ((human.getLayoutX() + human.getTranslateX()) >= 400){
+                    updateBoxPosition();
+
+                }
             }
         };
         timer.start();
     }
 
-    @FXML
-    public void initialize() {
-        if (anchorPane != null && anchorPane.getScene() != null) {
-            initialize(anchorPane.getScene());
-        }
-    }
 
     public void handleKeyboard(KeyEvent e) {
         TranslateTransition transition = new TranslateTransition(Duration.millis(200), human);
-        transition.setCycleCount(1);
+//        transition.setCycleCount(1);
         transition.setAutoReverse(false);
 
         switch (e.getCode()) {
@@ -81,7 +76,8 @@ public class Animation {
                 movePlayerX(10);
                 break;
             case W:
-                if (human.getY() <= 346) {
+                if (human.getLayoutY() == 346) {
+                    Timeline timeline = new Timeline();
                     timeline.stop();
                     timeline.getKeyFrames().clear();
 
@@ -100,22 +96,41 @@ public class Animation {
                 break;
         }
     }
-
+    private void handleKeyRelease(KeyEvent e) {
+        keys.put(e.getCode(), false);
+    }
     private void movePlayerX(int value) {
         double newX = human.getTranslateX() + value;
         human.setTranslateX(newX);
-    }
 
-    private boolean isPressed(KeyCode keyCode) {
-        return keys.getOrDefault(keyCode, false);
-    }
-
-    private void update() {
-        if (isPressed(KeyCode.A)) {
-            movePlayerX(-10);
+        double playerX = human.getLayoutX() + human.getTranslateX();
+        if (Math.abs(playerX - 400) < 5) {
+            boxSpeed = 5.0;
+        } else {
+            boxSpeed = 0.0;
         }
-        if (isPressed(KeyCode.D)) {
-            movePlayerX(10);
+    }
+    private boolean isPressed(KeyCode keyCode) {
+        return keys.getOrDefault(keyCode,false);
+    }
+    private void update() {
+        if (human != null) {
+            if (isPressed(KeyCode.A)) {
+                movePlayerX(-10);
+            }
+            if (isPressed(KeyCode.D)) {
+                movePlayerX(10);
+            }
+        }
+    }
+    private void updateBoxPosition() {
+        if (box_move != null) {
+            double newY = box_move.getTranslateY() + boxSpeed;
+            box_move.setTranslateY(newY);
+
+            box_move.setTranslateY(500);
+            boxSpeed = 0.0;
+
         }
     }
 }
