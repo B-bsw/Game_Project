@@ -1,22 +1,19 @@
-package game.game_leveldevil;
+package game.game_hard;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BackgroundFill;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class Main extends Application {
     private static Stage stageS;
 
     @Override
     public void start(Stage stage) throws IOException {
         stageS = stage;
-        switchPage("hello-view.fxml");
+        switchPage("first.fxml");
         stageS.setTitle("MyApp");
         stageS.show();
     }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Box?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.game_hard.Animation">
+   <Rectangle arcHeight="5.0" arcWidth="5.0" height="800.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
+   <Box fx:id="b" depth="100" height="250.0" layoutX="600.0" layoutY="125.0" width="1200.0" />
+   <Box depth="100" height="400.0" layoutX="200.0" layoutY="607.0" width="400.0" />
+   <ImageView fx:id="human" fitHeight="61.0" fitWidth="58.0" layoutX="49.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@spider-man.png" />
+   </ImageView>
+   <Box depth="100" height="400.0" layoutX="600.0" layoutY="607.0" width="400.0" />
+   <Box depth="100" height="400.0" layoutX="1000.0" layoutY="607.0" width="400.0" />
+</AnchorPane>
