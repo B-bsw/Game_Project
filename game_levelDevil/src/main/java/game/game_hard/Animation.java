@@ -19,7 +19,6 @@ import java.util.List;
 public class Animation {
     @FXML
     private Label welcomeText;
-
     @FXML
     private AnchorPane anchorPane;
 
@@ -27,11 +26,14 @@ public class Animation {
     private Box b;
     @FXML
     private Box box_move;
-
     @FXML
     private ImageView human;
+
     private double boxSpeed = 5.0;
     private int setLocBoxMove = 380;
+    private double humanSpeedY = 0.0;
+    private final double GRAVITY = 0.5;
+    private final double JUMP_SPEED = -10.0;
 
     private HashMap<KeyCode, Boolean> keys = new HashMap<>();
     private Scene scene;
@@ -53,10 +55,8 @@ public class Animation {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                System.out.println("Player X: " + (human.getLayoutX() + human.getTranslateX()));
-                if ((human.getLayoutX() + human.getTranslateX()) >= setLocBoxMove){
-                    updateBoxPosition();
-                }
+//                System.out.println("Player X: " + (human.getLayoutX() + human.getTranslateX()));
+                    update();
             }
         };
         timer.start();
@@ -64,41 +64,16 @@ public class Animation {
 
 
     public void handleKeyboard(KeyEvent e) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(200), human);
-//        transition.setCycleCount(1);
-        transition.setAutoReverse(false);
-
-        switch (e.getCode()) {
-            case A:
-                movePlayerX(-10);
-                break;
-            case D:
-                movePlayerX(10);
-                break;
-            case W:
-                if (human.getLayoutY() == 346) {
-                    Timeline timeline = new Timeline();
-                    timeline.stop();
-                    timeline.getKeyFrames().clear();
-
-                    timeline.getKeyFrames().addAll(
-                            new KeyFrame(Duration.ZERO,
-                                    new KeyValue(human.translateYProperty(), human.getTranslateY())),
-                            new KeyFrame(Duration.millis(200),
-                                    new KeyValue(human.translateYProperty(), human.getTranslateY() - 30)),
-                            new KeyFrame(Duration.millis(400),
-                                    new KeyValue(human.translateYProperty(), human.getTranslateY()))
-                    );
-                    timeline.play();
-                }
-                break;
-            default:
-                break;
+        keys.put(e.getCode(), true);
+        if (e.getCode() == KeyCode.W && (isOnBox(b) || isOnBox(box_move))) {
+            humanSpeedY = JUMP_SPEED;
         }
     }
+
     private void handleKeyRelease(KeyEvent e) {
         keys.put(e.getCode(), false);
     }
+
     private void movePlayerX(int value) {
         double newX = human.getTranslateX() + value;
         human.setTranslateX(newX);
@@ -113,25 +88,59 @@ public class Animation {
     private boolean isPressed(KeyCode keyCode) {
         return keys.getOrDefault(keyCode,false);
     }
+
     private void update() {
-        if (human != null) {
+        if (human != null && box_move != null) {
             if (isPressed(KeyCode.A)) {
-                movePlayerX(-10);
+                movePlayerX(-5);
             }
             if (isPressed(KeyCode.D)) {
-                movePlayerX(10);
+                movePlayerX(5);
             }
-        }
-    }
-    private void updateBoxPosition() {
-        if (box_move != null) {
-            double newY = box_move.getTranslateY() + boxSpeed;
-            box_move.setTranslateY(newY);
 
-            if (newY > 500) {
-                box_move.setTranslateY(500);
-                boxSpeed = 0.0;
+            humanSpeedY += 0.04;
+            if (human.getLayoutX() + human.getTranslateX() > 400){
+
+                double newHumanY = human.getTranslateY() + humanSpeedY;
+                human.setTranslateY(newHumanY);
+
+                double newBoxY = box_move.getTranslateY() + boxSpeed;
+                box_move.setTranslateY(newBoxY);
+
+                if (newBoxY >= 500) {
+                    box_move.setTranslateY(500);
+                    boxSpeed = 0.0;
+                }
+
+                if (isOnBox(b)) {
+                    double boxTop = box_move.getTranslateY() - (human.getFitHeight() / 2);
+                    human.setTranslateY(boxTop);
+                    humanSpeedY = 0.0;
+                } else if (human.getTranslateY() > 500) {
+                    human.setTranslateY(500);
+                    humanSpeedY = 0.0;
+                }
             }
+
         }
     }
+
+    private boolean isOnBox(Box box) {
+        if (human == null || box == null) return false;
+
+        double humanLeft = human.getLayoutX() + human.getTranslateX();
+        double humanRight = humanLeft + human.getFitWidth();
+        double humanBottom = human.getTranslateY() + (human.getFitHeight() / 2);
+
+        double boxLeft = box.getTranslateX();
+        double boxRight = boxLeft + box.getWidth();
+        double boxTop = box.getTranslateY();
+
+        boolean onBox = humanBottom >= boxTop - 5 &&
+                humanBottom <= boxTop + 10 &&
+                humanRight > boxLeft &&
+                humanLeft < boxRight;
+        return onBox;
+    }
+
 }
