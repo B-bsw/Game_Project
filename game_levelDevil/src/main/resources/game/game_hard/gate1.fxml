@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Box?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.99" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.game_hard.Animation">
+<AnchorPane fx:id="anchorPane" opacity="0.99" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.game_hard.Animation">
    <Box fx:id="box_floor" depth="100" height="250.0" layoutX="600.0" layoutY="125.0" width="1200.0" />
-   <Box fx:id="box_1" depth="100" height="400.0" layoutX="382.0" layoutY="509.0" width="400.0" />
-   <ImageView fx:id="human" fitHeight="61.0" fitWidth="58.0" layoutX="123.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@spider-man.png" />
+   <Box fx:id="box_1" depth="100" height="400.0" layoutX="200.0" layoutY="607.0" width="400.0" />
+   <ImageView fx:id="human" fitHeight="61.0" fitWidth="58.0" layoutX="134.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@shinchan.png" />
    </ImageView>
    <Box fx:id="box_move" depth="100" height="400.0" layoutX="600.0" layoutY="607.0" width="400.0" />
    <Box fx:id="box_2" depth="100" height="400.0" layoutX="1000.0" layoutY="607.0" width="400.0" />
+   <Box fx:id="box_3" depth="100" height="200.0" layoutX="50.0" layoutY="344.0" width="100.0" />
+   <Box fx:id="box_4" depth="100" height="200.0" layoutX="1150.0" layoutY="344.0" width="100.0" />
+   <ImageView fx:id="door" fitHeight="61.0" fitWidth="81.0" layoutX="992.0" layoutY="349.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@door-pixel.png"/>
+   </ImageView>
 </AnchorPane>
