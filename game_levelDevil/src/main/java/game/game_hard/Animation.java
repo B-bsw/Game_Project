@@ -31,6 +31,7 @@ public class Animation {
     @FXML
     private ImageView human;
     private double boxSpeed = 5.0;
+    private int setLocBoxMove = 380;
 
     private HashMap<KeyCode, Boolean> keys = new HashMap<>();
     private Scene scene;
@@ -53,9 +54,8 @@ public class Animation {
             @Override
             public void handle(long now) {
                 System.out.println("Player X: " + (human.getLayoutX() + human.getTranslateX()));
-                if ((human.getLayoutX() + human.getTranslateX()) >= 400){
+                if ((human.getLayoutX() + human.getTranslateX()) >= setLocBoxMove){
                     updateBoxPosition();
-
                 }
             }
         };
@@ -104,7 +104,7 @@ public class Animation {
         human.setTranslateX(newX);
 
         double playerX = human.getLayoutX() + human.getTranslateX();
-        if (Math.abs(playerX - 400) < 5) {
+        if (playerX >= setLocBoxMove) {
             boxSpeed = 5.0;
         } else {
             boxSpeed = 0.0;
@@ -128,9 +128,10 @@ public class Animation {
             double newY = box_move.getTranslateY() + boxSpeed;
             box_move.setTranslateY(newY);
 
-            box_move.setTranslateY(500);
-            boxSpeed = 0.0;
-
+            if (newY > 500) {
+                box_move.setTranslateY(500);
+                boxSpeed = 0.0;
+            }
         }
     }
 }
