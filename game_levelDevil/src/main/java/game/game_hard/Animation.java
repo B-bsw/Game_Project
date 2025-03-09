@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Box;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +36,7 @@ public class Animation {
     private Point2D playerVelocity = new Point2D(0, 0);
     private Stage stage;
     private Scene scene;
+    private boolean pass = true;
 
     private HashMap<KeyCode, Boolean> keys = new HashMap<>();
     private List<Box> group_Box = new ArrayList<>();
@@ -165,7 +167,10 @@ public class Animation {
             if (door != null && door.getBoundsInParent().intersects(human.getBoundsInParent())) {
                 if (human.getTranslateX() > 870 && human.getTranslateY() == 2) {
                     System.out.println("to gate 2");
-                    sw2Gate2();
+                    if (pass){
+                        pass = false;
+                        sw2Gate2();
+                    }
                 }
             }
         }
@@ -203,16 +208,31 @@ public class Animation {
         if (stage == null) {
             throw new IllegalStateException("Stage is not initialized");
         }
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gate2.fxml"));
         Parent root = loader.load();
 
         Controller_gate2 controller = loader.getController();
         Scene newScene = new Scene(root);
+        controller.setStage(stage);
         controller.initialize(newScene);
 
         stage.setScene(newScene);
         stage.setTitle("Gate 2");
+        stage.show();
+    }
+
+    public void sw2Gate3() throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate3.fxml"));
+        Parent root = loader.load();
+
+        Controller_gate3 controller = loader.getController();
+        Scene newScene = new Scene(root);
+        controller.setStage(stage);
+        controller.initialize(newScene);
+
+        stage.setScene(newScene);
+        stage.setTitle("Gate 3");
         stage.show();
     }
 

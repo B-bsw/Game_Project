@@ -2,6 +2,8 @@ package game.game_hard;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -20,6 +22,7 @@ public class Controller_gate2 extends Animation{
     @FXML
     private AnchorPane anchorPane;
     private Scene scene;
+    private Stage stage;
     private List<Box> group_Box;
     private Animation gate2;
 
@@ -34,7 +37,8 @@ public class Controller_gate2 extends Animation{
          group_Box.add(box2);
          group_Box.add(box3);
          group_Box.add(box4);
-         gate2 = new Animation(human2,group_Box,scene,anchorPane,null);
+        this.stage = (Stage) scene.getWindow();
+        gate2 = new Animation(human2,group_Box,scene,anchorPane,null);
          gate2.setStage((Stage) scene.getWindow());
          gate2.initialize(scene);
         AnimationTimer timer = new AnimationTimer() {
@@ -61,9 +65,26 @@ public class Controller_gate2 extends Animation{
                 if (human2.getTranslateX() > 840 && door2.getTranslateY() == 0){
                     System.out.println("OK");
                     speedBox = 0.0;
+                    super.sw2Gate3();
                 }
             }
         }
      }
+
+     @Override
+    public void sw2Gate3() throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate3.fxml"));
+        Parent root = loader.load();
+
+        Controller_gate3 controller = loader.getController();
+        Scene newScene = new Scene(root);
+        controller.setStage(stage);
+        controller.initialize(newScene);
+
+        stage.setScene(newScene);
+        stage.setTitle("Gate 3");
+        stage.show();
+    }
 
 }
