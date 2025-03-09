@@ -28,9 +28,9 @@ public class Animation {
     private ImageView human, door;
 
     private boolean once = false;
-    private double boxSpeed = 1.0;
+    private double boxSpeed = 2.0;
     private double humanSpeedY = 0.0;
-    private double JUMP_SPEED = -10.0;
+    private double JUMP_SPEED = 0.0;
     private boolean canJump = true;
     private Point2D playerVelocity = new Point2D(0, 0);
     private Stage stage;
