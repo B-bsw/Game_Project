@@ -2,11 +2,8 @@ package game.game_hard;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Box;
 import javafx.stage.Stage;
@@ -14,7 +11,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Controller_gate2 extends Animation{
     @FXML
@@ -57,13 +53,11 @@ public class Controller_gate2 extends Animation{
      @Override
      public void update() throws IOException {
         if (human2 != null){
-//            System.out.println(human2.getTranslateX());
             if (human2.getTranslateX() > 400){
                 pass = true;
                 box2.setWidth(pass ? box2.getWidth() + speedBox : 0);
             }
             if (door2.getBoundsInParent().intersects(human2.getBoundsInParent())){
-            System.out.println(human2.getTranslateX() + " " + door2.getTranslateY());
                 if (human2.getTranslateX() > 840 && door2.getTranslateY() == 0){
                     System.out.println("OK");
                     speedBox = 0.0;

@@ -4,19 +4,14 @@ import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.shape.Box;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,9 +39,7 @@ public class Animation {
     private HashMap<KeyCode, Boolean> keys = new HashMap<>();
     private List<Box> group_Box = new ArrayList<>();
 
-    public Animation() {
-    }
-
+    public Animation() {}
     public Animation(ImageView human, List<Box> group_Box, Scene scene, AnchorPane anchorPane, Stage stage) {
         this.human = human;
         this.group_Box = group_Box;
@@ -170,7 +163,6 @@ public class Animation {
             }
 
             if (door != null && door.getBoundsInParent().intersects(human.getBoundsInParent())) {
-//                System.out.println(human.getTranslateX() + " " + human.getTranslateY());
                 if (human.getTranslateX() > 870 && human.getTranslateY() == 2) {
                     System.out.println("to gate 2");
                     sw2Gate2();
