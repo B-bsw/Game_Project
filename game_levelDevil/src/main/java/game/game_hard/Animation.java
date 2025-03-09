@@ -45,7 +45,6 @@ public class Animation {
     private List<Box> group_Box = new ArrayList<>();
     private Scene scene;
 
-
     public void initialize(Scene scene){
         group_Box.add(box_floor);
         group_Box.add(box_1);
@@ -62,13 +61,15 @@ public class Animation {
             @Override
             public void handle(long now) {
                 update();
+                if (door.getBoundsInParent().intersects(human.getBoundsInParent())){
+                    System.out.println("THE END");
+                }
             }
         };
+
         timer.start();
-        if (human.getBoundsInParent().intersects(door.getBoundsInParent())){
-            System.out.println("THE END");
-        }
     }
+
 
 
     public void handleKeyboard(KeyEvent e) {
@@ -83,53 +84,39 @@ public class Animation {
     }
 
     private void movePlayerX(int value) {
-        boolean movingRight =  value > 0;
-        for (int i = 0; i < Math.abs(value); i++) {
-            for (Box box : group_Box) {
+        boolean movingRight = value > 0;
+        human.setTranslateX(human.getTranslateX() + (movingRight ? Math.min(value, 2) : Math.max(value, -2))); // distance of player and wall
 
-                if (box.getBoundsInParent().intersects(human.getBoundsInParent())) {
-                    double threshold = 1.0;
-
-                    if (movingRight) {
-                        if (human.getTranslateX() > box.getTranslateX()) { //right
-                            return;
-                        }
-                    } else {
-                        if (box.getTranslateX() > human.getTranslateX()) { //left
-                            return;
-                        }
-                    }
+        for (Box box : group_Box) {
+            if (box.getBoundsInParent().intersects(human.getBoundsInParent())) {
+                if (movingRight) {
+                    human.setTranslateX(human.getTranslateX() - Math.abs(value));// set value right
+                } else {
+                    human.setTranslateX(human.getTranslateX() + Math.abs(value)); // set value left
                 }
+                break;
             }
-            human.setTranslateX(human.getTranslateX() + (value > 0 ? 2 : -2));
         }
     }
     private void movePlayerY(int value) {
         boolean movingDown = value > 0;
-        for (int i = 0; i < Math.abs(value); i++) {
-            for (Box box : group_Box) {
-                if (box.getBoundsInParent().intersects(human.getBoundsInParent())) {
-                    double threshold = 1.0;
+        human.setTranslateY(human.getTranslateY() + (movingDown ? Math.min(value, 1) : Math.max(value, -1)));
 
-                    if (movingDown) {
-                        if (human.getTranslateY()  > box.getTranslateY()) {
-                            human.setTranslateY(human.getTranslateY() - 1);
-                            canJump = true;
-                            return;
-                        }
-                    } else {
-                        if (human.getTranslateY() == box.getTranslateY()) {
-                            return;
-                        }
-                    }
+        for (Box box : group_Box) {
+            if (box.getBoundsInParent().intersects(human.getBoundsInParent())) {
+                if (movingDown) {
+                    human.setTranslateY(human.getTranslateY() - 1);
+                    canJump = true;
+                } else {
+                    human.setTranslateY(human.getTranslateY() + 1);
                 }
+                break;
             }
-            human.setTranslateY(human.getTranslateY() + (value > 0 ? 1 : -1));
         }
     }
     private void jumpPlayer() {
         if (canJump) {
-            playerVelocity = playerVelocity.add(0, -20);
+            playerVelocity = playerVelocity.add(0, -50);
             canJump = false;
         }
     }
@@ -160,9 +147,9 @@ public class Animation {
                 once = true;
             }
             if (once) {
-                double newBoxY = box_move.getTranslateY() + boxSpeed;
+                double newBoxY = box_move.getTranslateY() + 0.2;
                 box_move.setTranslateY(newBoxY);
-                human.setTranslateY(newBoxY + 25);
+//                human.setTranslateY(newBoxY + 25);
 
                 if (newBoxY >= 500) {
                     box_move.setTranslateY(500);
