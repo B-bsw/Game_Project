@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Box?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.game_hard.Animation">
-
+<AnchorPane fx:id="anchorPane" opacity="0.99" prefHeight="800.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="game.game_hard.Controller_gate2">
+   <ImageView fx:id="door2" fitHeight="61.0" fitWidth="81.0" layoutX="992.0" layoutY="347.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@door-pixel.png"/>
+   </ImageView>
+   <ImageView fx:id="human2" fitHeight="61.0" fitWidth="58.0" layoutX="152.0" layoutY="314.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@shinchan.png"/>
+   </ImageView>
+   <Box fx:id="box1" depth="100" height="250.0" layoutX="600.0" layoutY="125.0" width="1200.0"/>
+   <Box fx:id="box2" depth="100" height="250.0" layoutX="50.0" layoutY="375.0" width="100"/>
+   <Box fx:id="box3" depth="100" height="400.0" layoutX="600.0" layoutY="605.0" width="1200.0"/>
+   <Box fx:id="box4" depth="100" height="250.0" layoutX="1150.0" layoutY="375.0" width="100"/>
 </AnchorPane>
