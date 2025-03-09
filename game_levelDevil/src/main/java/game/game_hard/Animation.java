@@ -55,14 +55,14 @@ public class Animation {
         this.stage = stage;
     }
 
-    protected void initialize(Scene scene) {
-        // เพิ่ม Box จาก FXML ถ้ามี
+    protected void initialize(Scene scene) throws IOException {
         if (box_floor != null) group_Box.add(box_floor);
         if (box_1 != null) group_Box.add(box_1);
         if (box_2 != null) group_Box.add(box_2);
         if (box_3 != null) group_Box.add(box_3);
         if (box_4 != null) group_Box.add(box_4);
         if (box_move != null) group_Box.add(box_move);
+
         this.scene = scene;
 
         scene.setOnKeyPressed(this::handleKeyboard);
@@ -170,8 +170,8 @@ public class Animation {
             }
 
             if (door != null && door.getBoundsInParent().intersects(human.getBoundsInParent())) {
-                System.out.println(human.getTranslateX() + " " + human.getTranslateY());
-                if (human.getTranslateX() > 890 && human.getTranslateY() == 2) {
+//                System.out.println(human.getTranslateX() + " " + human.getTranslateY());
+                if (human.getTranslateX() > 870 && human.getTranslateY() == 2) {
                     System.out.println("to gate 2");
                     sw2Gate2();
                 }
