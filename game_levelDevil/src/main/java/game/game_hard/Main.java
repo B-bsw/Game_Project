@@ -15,7 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate4.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate1.fxml"));
         Parent root = loader.load();
         scene = new Scene(root);
 
@@ -24,7 +24,7 @@ public class Main extends Application {
         controller.initialize(scene);
 
         stage.setScene(scene);
-        stage.setTitle("MyGame");
+        stage.setTitle("Gate1");
         stage.show();
     }
     public static void setScene(String x) throws IOException {

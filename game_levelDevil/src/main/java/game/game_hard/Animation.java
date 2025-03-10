@@ -32,6 +32,8 @@ public class Animation {
     private double boxSpeed = 2.0;
     private double humanSpeedY = 0.0;
     private double JUMP_SPEED = 0.0;
+    private int keyA = -2;
+    private int keyD = 2;
     private boolean canJump = true;
     private Point2D playerVelocity = new Point2D(0, 0);
     private Stage stage;
@@ -134,10 +136,10 @@ public class Animation {
     protected void update() throws IOException {
         if (human != null) {
             if (isPressed(KeyCode.A)) {
-                movePlayerX(-2);
+                movePlayerX(-20);
             }
             if (isPressed(KeyCode.D)) {
-                movePlayerX(2);
+                movePlayerX(20);
             }
             if (isPressed(KeyCode.W)) {
                 jumpPlayer();
@@ -251,5 +253,24 @@ public class Animation {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+    public void setMoving(int value){
+        value = Math.abs(value);
+        keyA = -1 * value;
+        keyD = value;
+    }
+
+    protected void dead() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate1.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+
+        Animation controller = loader.getController();
+        controller.setStage(stage);
+        controller.initialize(scene);
+
+        stage.setScene(scene);
+        stage.setTitle("Gate1");
+        stage.show();
     }
 }
