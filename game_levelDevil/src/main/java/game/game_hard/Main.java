@@ -24,7 +24,7 @@ public class Main extends Application {
         controller.initialize(scene);
 
         stage.setScene(scene);
-        stage.setTitle("MyGame");
+        stage.setTitle("Gate1");
         stage.show();
     }
     public static void setScene(String x) throws IOException {

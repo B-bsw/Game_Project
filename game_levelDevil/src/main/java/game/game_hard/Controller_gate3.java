@@ -68,7 +68,7 @@ public class Controller_gate3 extends Animation{
                 }
             }
             if (passDoor){
-                if (human3.getTranslateX() <= 250){
+                if (human3.getTranslateX() <= 300){
                     passBox = true;
                     pass = false;
                 }
@@ -84,7 +84,7 @@ public class Controller_gate3 extends Animation{
             System.out.println(human3.getTranslateX());
             if (human3.getTranslateX() > 840){
                 System.out.println("END GAME");
-                //go to gate4
+                sw2Gate4();
             }
         }
     }

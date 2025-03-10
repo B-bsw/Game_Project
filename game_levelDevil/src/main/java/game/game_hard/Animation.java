@@ -1,6 +1,7 @@
 package game.game_hard;
 
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -29,9 +30,11 @@ public class Animation {
     private ImageView human, door;
 
     private boolean once = false;
-    private double boxSpeed = 2.0;
+    private double boxSpeed = 0.2;
     private double humanSpeedY = 0.0;
     private double JUMP_SPEED = 0.0;
+    private int keyA = -2;
+    private int keyD = 2;
     private boolean canJump = true;
     private Point2D playerVelocity = new Point2D(0, 0);
     private Stage stage;
@@ -66,10 +69,12 @@ public class Animation {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                try {
-                    update();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                if (now - 0 >= 16_666_667){
+                    try {
+                        update();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         };
@@ -135,9 +140,11 @@ public class Animation {
         if (human != null) {
             if (isPressed(KeyCode.A)) {
                 movePlayerX(-2);
+                human.setScaleX(-1);
             }
             if (isPressed(KeyCode.D)) {
                 movePlayerX(2);
+                human.setScaleX(1);
             }
             if (isPressed(KeyCode.W)) {
                 jumpPlayer();
@@ -154,14 +161,22 @@ public class Animation {
                     once = true;
                 }
                 if (once) {
-                    double newBoxY = box_move.getTranslateY() + 0.2;
+                    double newBoxY = box_move.getTranslateY() + boxSpeed;
                     box_move.setTranslateY(newBoxY);
+                    boxSpeed += 0.001;
 
                     if (newBoxY >= 500) {
                         box_move.setTranslateY(500);
                         boxSpeed = 0.0;
                     }
                 }
+            }
+            if (human.getTranslateY() == 500){
+                System.out.println("check");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("gate1.fxml"));
+                Parent root = loader.load();
+//                stage.getScene().setRoot(root); //
+                reset(stage);
             }
 
             if (door != null && door.getBoundsInParent().intersects(human.getBoundsInParent())) {
@@ -236,7 +251,7 @@ public class Animation {
     }
 
     public void sw2Gate4() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate3.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate4.fxml"));
         Parent root = loader.load();
 
         Controller_gate4 controller = loader.getController();
@@ -245,11 +260,45 @@ public class Animation {
         controller.initialize(newScene);
 
         stage.setScene(newScene);
-        stage.setTitle("Gate 3");
+        stage.setTitle("Gate 4");
         stage.show();
     }
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public void setMoving(int value){
+        value = Math.abs(value);
+        keyA = -1 * value;
+        keyD = value;
+    }
+
+    protected void dead() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate1.fxml"));
+        Parent root = loader.load();
+        scene = new Scene(root);
+
+        Animation controller = loader.getController();
+        controller.setStage(stage);
+        controller.initialize(scene);
+
+        stage.setScene(scene);
+        stage.setTitle("Gate1");
+        stage.show();
+    }
+
+    protected void reset(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate1.fxml"));
+        Parent root = loader.load();
+
+        Animation controller = loader.getController();
+        Scene newScene = new Scene(root);
+        controller.setStage(stage);
+        controller.initialize(newScene);
+
+        stage.setScene(newScene);
+        stage.setTitle("Gate 1");
+        stage.show();
     }
 }

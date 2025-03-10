@@ -2,6 +2,8 @@ package game.game_hard;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +23,9 @@ public class Controller_gate4  extends Animation{
     private Scene scene;
     private Stage stage;
     private Animation gate4;
+    private double speedDog = 10.0;
+    private boolean pass = false;
+    private boolean passDog = false;
 
     @Override
     public void initialize(Scene scene) throws IOException {
@@ -43,17 +48,41 @@ public class Controller_gate4  extends Animation{
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                update();
+                try {
+                    update();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
         timer.start();
     }
 
     @Override
-    protected void update() {
+    protected void update() throws IOException {
         if (human4.getTranslateX() > 100){
+            pass = true;
             dog.setVisible(true);
-            dog.setLayoutX(dog.getLayoutX() - 10);
+
+        }
+        if (pass){
+            if (dog.getTranslateX() < 1){
+                dog.setTranslateX(dog.getTranslateX() - speedDog);
+                passDog = true;
+            }
+            if (passDog){
+                if (dog.getTranslateX() == -600){
+                    speedDog = 0.0;
+                    dog.setVisible(false);
+                    dog.setLayoutX(1);
+                    dog.setLayoutY(1);
+                }
+            }
+        }
+        if (dog.getBoundsInParent().intersects(human4.getBoundsInParent())){
+            setMoving(0);
+            dead();
+            setMoving(2);
         }
     }
 }
