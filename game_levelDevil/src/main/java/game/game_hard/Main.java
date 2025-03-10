@@ -15,7 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate4.fxml"));
         Parent root = loader.load();
         scene = new Scene(root);
 

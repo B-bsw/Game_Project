@@ -222,11 +222,24 @@ public class Animation {
     }
 
     public void sw2Gate3() throws IOException {
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gate3.fxml"));
         Parent root = loader.load();
 
         Controller_gate3 controller = loader.getController();
+        Scene newScene = new Scene(root);
+        controller.setStage(stage);
+        controller.initialize(newScene);
+
+        stage.setScene(newScene);
+        stage.setTitle("Gate 3");
+        stage.show();
+    }
+
+    public void sw2Gate4() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate3.fxml"));
+        Parent root = loader.load();
+
+        Controller_gate4 controller = loader.getController();
         Scene newScene = new Scene(root);
         controller.setStage(stage);
         controller.initialize(newScene);

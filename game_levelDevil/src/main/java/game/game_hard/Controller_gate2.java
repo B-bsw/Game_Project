@@ -70,21 +70,4 @@ public class Controller_gate2 extends Animation{
             }
         }
      }
-
-     @Override
-    public void sw2Gate3() throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("gate3.fxml"));
-        Parent root = loader.load();
-
-        Controller_gate3 controller = loader.getController();
-        Scene newScene = new Scene(root);
-        controller.setStage(stage);
-        controller.initialize(newScene);
-
-        stage.setScene(newScene);
-        stage.setTitle("Gate 3");
-        stage.show();
-    }
-
 }

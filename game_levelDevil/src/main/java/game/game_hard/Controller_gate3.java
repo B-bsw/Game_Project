@@ -13,6 +13,7 @@ import java.util.List;
 
 public class Controller_gate3 extends Animation{
     private Scene scene;
+    private Stage stage;
     private List<Box> group_Box;
     private Animation gate3;
     private boolean pass = true;
@@ -25,6 +26,7 @@ public class Controller_gate3 extends Animation{
 
     public void initialize(Scene scene) throws IOException {
         this.scene = scene;
+        this.stage = (Stage) scene.getWindow();
         group_Box = new ArrayList<>();
         group_Box.add(box1);
         group_Box.add(box2);
