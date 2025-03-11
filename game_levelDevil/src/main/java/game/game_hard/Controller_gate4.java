@@ -87,7 +87,7 @@ public class Controller_gate4 extends Animation {
                 if (dog.getTranslateX() == -550) {
                 }
                 if (passDog) {
-                    if (dog.getTranslateX() == -600) {
+                    if (dog.getTranslateX() == -500) {
                         speedDog = 0.0;
                         dog.setVisible(false);
                         dog.setLayoutX(1);
@@ -98,14 +98,12 @@ public class Controller_gate4 extends Animation {
             }
             if (passLast) {
                 if (dog.getBoundsInParent().intersects(human4.getBoundsInParent())) {
-                    setMoving(0);
-                    dead();
-                    setMoving(2);
                     pass = false;
                     passDog = false;
                     passFate2 = false;
                     passLast = false;
                     passFate3 = false;
+                    dead();
                 }
             }
             if (passTheDog) {
@@ -168,9 +166,7 @@ public class Controller_gate4 extends Animation {
                 endGame();
             }
             if(dog.getBoundsInParent().intersects(human4.getBoundsInParent())){
-                setMoving(0);
                 dead();
-                setMoving(2);
             }
         }
     }
