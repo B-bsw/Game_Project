@@ -90,10 +90,10 @@ public class Controller_gate3 extends Animation{
         }
         if (human3.getTranslateY() > 500){
             if (passGate){
-                dead();
                 passDoor = false;
                 passBox = false;
                 passGate = false;
+                dead();
             }
         }
     }

@@ -20,7 +20,6 @@ public class Main extends Application {
         Parent root = loader.load();
         scene = new Scene(root);
 
-
         MainMenu con = loader.getController();
 //        EndGame con = loader.getController();
 //        con.setStage(stage);
