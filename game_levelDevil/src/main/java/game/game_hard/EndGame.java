@@ -5,28 +5,33 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.text.Font;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainMenu extends Animation{
+public class EndGame extends Animation{
+    @FXML
+    private AnchorPane anchorPane;
     private Stage stage;
+    private Scene scene;
 
     @FXML
-    private void handleBtn() throws IOException {
-        stage = Main.getStage();
+    public void handleReset() throws IOException {
         dead();
-        stage.close();
+    }
+    public void setScene(Scene scene){
+        this.scene = scene;
+    }
+    public void setStage(Stage stage){
+        this.stage = stage;
     }
 
     @Override
     protected void dead() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gate1.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
+        scene = new Scene(root);
 
         Animation controller = loader.getController();
         controller.setStage(stage);

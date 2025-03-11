@@ -2,6 +2,8 @@ package game.game_hard;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -19,6 +21,7 @@ public class Controller_gate3 extends Animation{
     private boolean pass = true;
     private static boolean passBox = false;
     private static boolean passDoor ;
+    private boolean passGate = true;
 
     @FXML private AnchorPane anchorPane3;
     @FXML private ImageView human3,door3;
@@ -28,6 +31,7 @@ public class Controller_gate3 extends Animation{
         this.scene = scene;
         this.stage = (Stage) scene.getWindow();
         group_Box = new ArrayList<>();
+
         group_Box.add(box1);
         group_Box.add(box2);
         group_Box.add(box3);
@@ -60,7 +64,6 @@ public class Controller_gate3 extends Animation{
         if (human3 != null){
             if (pass){
                 if (human3.getTranslateX() > 480){
-                    System.out.println(" door : " + door3.getTranslateY());
                     if (human3.getTranslateX() - 750 > door3.getTranslateX()){
                         passDoor = true;
                         door3.setLayoutX(136);
@@ -81,10 +84,16 @@ public class Controller_gate3 extends Animation{
             }
         }
         if (door3.getBoundsInParent().intersects(human3.getBoundsInParent())){
-            System.out.println(human3.getTranslateX());
             if (human3.getTranslateX() > 840){
-                System.out.println("END GAME");
                 sw2Gate4();
+            }
+        }
+        if (human3.getTranslateY() > 500){
+            if (passGate){
+                dead();
+                passDoor = false;
+                passBox = false;
+                passGate = false;
             }
         }
     }

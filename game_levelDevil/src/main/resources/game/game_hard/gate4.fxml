@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Box?>
 
-<AnchorPane fx:id="anchorPane4" maxHeight="800.0" minHeight="800.0" opacity="0.99" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.game_hard.Controller_gate4">
+<AnchorPane fx:id="anchorPane4" maxHeight="800.0" minHeight="800.0" minWidth="1200.0" opacity="0.99" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.game_hard.Controller_gate4">
     <ImageView fx:id="door4" fitHeight="61.0" fitWidth="81.0" layoutX="992.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@door-pixel.png" />
     </ImageView>
-    <ImageView fx:id="human4" fitHeight="61.0" fitWidth="58.0" layoutX="135.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="human4" fitHeight="61.0" fitWidth="58.0" layoutX="240.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@shinchan.png" />
     </ImageView>
    <ImageView fx:id="dog" fitHeight="61.0" fitWidth="58.0" layoutX="880.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -19,11 +19,13 @@
    </ImageView>
     <Box fx:id="box1" depth="100" height="250.0" layoutX="600.0" layoutY="125.0" width="1200.0" />
     <Box fx:id="box2" depth="100" height="250.0" layoutX="50.0" layoutY="375.0" width="100" />
-    <Box fx:id="box3" depth="100" height="250.0" layoutX="1150.0" layoutY="375.0" width="100" />
+    <Box fx:id="box3" depth="100" height="250.0" layoutX="1582.0" layoutY="342.0" width="964.0" />
     <Box fx:id="box4" depth="100" height="400.0" layoutX="100.0" layoutY="600.0" width="200.0" />
     <Box fx:id="box5" depth="100" height="400.0" layoutX="300.0" layoutY="600.0" width="200.0" />
     <Box fx:id="box6" depth="100" height="400.0" layoutX="500.0" layoutY="600.0" width="200.0" />
     <Box fx:id="box7" depth="100" height="400.0" layoutX="900.0" layoutY="600.0" width="200.0" />
     <Box fx:id="box8" depth="100" height="400.0" layoutX="700.0" layoutY="600.0" width="200.0" />
     <Box fx:id="box9" depth="100" height="400.0" layoutX="1100.0" layoutY="600.0" width="200.0" />
+   <Box fx:id="box10" depth="100" height="250.0" layoutX="50.0" layoutY="625.0" width="100" />
+   <Box fx:id="box11" depth="100" height="250.0" layoutX="50.0" layoutY="675.0" width="100" />
 </AnchorPane>

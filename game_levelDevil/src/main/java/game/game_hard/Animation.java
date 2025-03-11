@@ -40,6 +40,7 @@ public class Animation {
     private Stage stage;
     private Scene scene;
     private boolean pass = true;
+    private boolean passR = false;
 
     private HashMap<KeyCode, Boolean> keys = new HashMap<>();
     private List<Box> group_Box = new ArrayList<>();
@@ -220,9 +221,6 @@ public class Animation {
     }
 
     private void sw2Gate2() throws IOException {
-        if (stage == null) {
-            throw new IllegalStateException("Stage is not initialized");
-        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gate2.fxml"));
         Parent root = loader.load();
 
@@ -239,14 +237,14 @@ public class Animation {
     public void sw2Gate3() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gate3.fxml"));
         Parent root = loader.load();
+        scene = new Scene(root);
 
-        Controller_gate3 controller = loader.getController();
-        Scene newScene = new Scene(root);
+        Animation controller = loader.getController();
         controller.setStage(stage);
-        controller.initialize(newScene);
+        controller.initialize(scene);
 
-        stage.setScene(newScene);
-        stage.setTitle("Gate 3");
+        stage.setScene(scene);
+        stage.setTitle("Gate3");
         stage.show();
     }
 
@@ -272,6 +270,9 @@ public class Animation {
         value = Math.abs(value);
         keyA = -1 * value;
         keyD = value;
+    }
+    public int getMoving(){
+        return keyD;
     }
 
     protected void dead() throws IOException {
@@ -299,6 +300,17 @@ public class Animation {
 
         stage.setScene(newScene);
         stage.setTitle("Gate 1");
+        stage.show();
+    }
+
+    protected void endGame() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("shinchan_home.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        EndGame con = loader.getController();
+        con.setStage(stage);
+        stage.setScene(scene);
+        stage.setTitle("End Game");
         stage.show();
     }
 }
