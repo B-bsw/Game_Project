@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class EndGame extends Animation{
+public class EndGame{
     @FXML
     private AnchorPane anchorPane;
     private Stage stage;
@@ -27,7 +27,6 @@ public class EndGame extends Animation{
         this.stage = stage;
     }
 
-    @Override
     protected void dead() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gate1.fxml"));
         Parent root = loader.load();

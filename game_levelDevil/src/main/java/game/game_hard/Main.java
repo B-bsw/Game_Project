@@ -27,10 +27,9 @@ public class Main extends Application {
 //        Animation controller = loader.getController();
 //        controller.setStage(stage);
 //        controller.initialize(scene);
-
         stage.setScene(scene);
         this.stage = stage;
-        stage.setTitle("Gate1");
+        stage.setTitle("Menu");
         stage.show();
     }
 

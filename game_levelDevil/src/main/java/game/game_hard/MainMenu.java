@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainMenu extends Animation{
+public class MainMenu {
     private Stage stage;
 
     @FXML
@@ -21,7 +21,6 @@ public class MainMenu extends Animation{
         stage.close();
     }
 
-    @Override
     protected void dead() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gate1.fxml"));
         Parent root = loader.load();

@@ -31,8 +31,6 @@ public class Animation {
 
     private boolean once = false;
     private double boxSpeed = 0.2;
-    private double humanSpeedY = 0.0;
-    private double JUMP_SPEED = 0.0;
     private int keyA = -2;
     private int keyD = 2;
     private boolean canJump = true;
@@ -84,11 +82,7 @@ public class Animation {
 
     private void handleKeyboard(KeyEvent e) {
         keys.put(e.getCode(), true);
-        if (e.getCode() == KeyCode.W && (isOnBox(group_Box) || isOnBox(group_Box))) {
-            humanSpeedY = JUMP_SPEED;
-        }
     }
-
     private void handleKeyRelease(KeyEvent e) {
         keys.put(e.getCode(), false);
     }
@@ -176,7 +170,6 @@ public class Animation {
                 System.out.println("check");
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("gate1.fxml"));
                 Parent root = loader.load();
-//                stage.getScene().setRoot(root); //
                 reset(stage);
             }
 
@@ -193,7 +186,7 @@ public class Animation {
     }
 
     private boolean isOnBox(List<Box> b) {
-        for (Box box : b) {
+        for (Box box : b) { // checkBox
             if (human == null || box == null) return false;
 
             double humanLeft = human.getLayoutX() + human.getTranslateX();
